@@ -11,6 +11,21 @@ class gui:
     def __init__(self):
         app = gui("Gui fast food menu", "1920x1080")
         self._app = app
+        app.addLabel("title", colspan=2)
+        app.setLabelBg("title", "blue")
+        app.setLabelFg("title", "orange")
+        app.setLabel("title", "food menu")
+
+        with app.frameStack("stack"):
+            with app.frame("data_collection"):
+                
+
+
+            with app.frame("data_display"):
+
+
+        app.firstFrame("stack")  # Sets the first frame added to stack to display first
+        app.go()
 
 
     def press(button):
