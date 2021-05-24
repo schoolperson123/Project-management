@@ -21,15 +21,14 @@ class Gui:
                 - the data display window
         """
 
-        app = gui("Gui fast food menu", "1920x1080")
+        app = gui("Gui fast food menu", "1750x920")
         self._app = app
         app.addLabel("title", colspan=2)
         app.setLabelBg("title", "blue")
         app.setLabelFg("title", "orange")
-
         with app.frameStack("stack"):
             """
-            stacks the frames and giving the ability to switch through
+            stacks the frames giving the ability to switch through
             the frames seamlessy without any errors
             """
             with app.frame("data_collection"):
@@ -42,22 +41,30 @@ class Gui:
                 app.setImageLocation("images")
                 app.addImage("images", "image.jpeg")
                 app.addButtons(["Food", "Drinks"], self.press)
+
             with app.frame("food display"):
                 """
                 This frame controls the food section
                 """
-                app.addButtons(["burger", "fries", "melon", "Back"], self.press)
+                app.addButtons(["burger", "fries", "melon"], self.press)
                 app.setBg("lightBlue")
                 app.setFont(20)
                 app.startToggleFrame("Toppings")
                 app.addProperties("Toppings", toppings)
                 app.setPropertiesChangeFunction("Toppings", changed)
                 app.stopToggleFrame()
+                app.addNamedButton("Back", "Back_button", self.press)
+
             with app.frame("data_display"):
                 """
-                this frame controls the drinks sections
+                this frame controls the liquids sections
                 """
                 app.addButtons(["coke", "pepsi", "water"], self.press)
+                app.setBg("lightBlue")
+                app.setFont(20)
+                app.getButton("Back_button")
+
+
 
         app.firstFrame("stack")  # Sets the first frame added to stack to display first
         app.go()
@@ -66,13 +73,12 @@ class Gui:
     def press(self, btn):
         if btn == "Food":
             self._app.nextFrame("stack")
-            if btn != "Food":
-                order.append("")
-                pass
-        if btn == "Back":
-            self._app.prevFrame("stack")
-        if btn == "drinks":
-            self._app.nextFrame("stack")
+        elif btn == "Back_button":
+            self._app.firstFrame("stack")
+        elif btn == "Drinks":
+            self._app.lastFrame("stack")
+
+
 
 # main routine
 window = Gui()
