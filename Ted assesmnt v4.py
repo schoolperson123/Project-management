@@ -26,6 +26,9 @@ class Gui:
         app.addLabel("title", colspan=2)
         app.setLabelBg("title", "blue")
         app.setLabelFg("title", "orange")
+        with app.frame("Back"):
+            app.addButton("Back", self.press)
+
         with app.frameStack("stack"):
             """
             stacks the frames giving the ability to switch through
@@ -41,7 +44,6 @@ class Gui:
                 app.setImageLocation("images")
                 app.addImage("images", "image.jpeg")
                 app.addButtons(["Food", "Drinks"], self.press)
-
             with app.frame("food display"):
                 """
                 This frame controls the food section
@@ -53,8 +55,7 @@ class Gui:
                 app.addProperties("Toppings", toppings)
                 app.setPropertiesChangeFunction("Toppings", changed)
                 app.stopToggleFrame()
-                app.addNamedButton("Back", "Back_button", self.press)
-
+                app.showFrame("Back")
             with app.frame("data_display"):
                 """
                 this frame controls the liquids sections
@@ -62,7 +63,12 @@ class Gui:
                 app.addButtons(["coke", "pepsi", "water"], self.press)
                 app.setBg("lightBlue")
                 app.setFont(20)
-                app.getButton("Back_button")
+                app.showFrame("Back")
+
+
+
+
+
 
 
 
@@ -73,7 +79,7 @@ class Gui:
     def press(self, btn):
         if btn == "Food":
             self._app.nextFrame("stack")
-        elif btn == "Back_button":
+        elif btn == "Back":
             self._app.firstFrame("stack")
         elif btn == "Drinks":
             self._app.lastFrame("stack")
