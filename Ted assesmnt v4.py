@@ -55,7 +55,7 @@ class Gui:
                 app.addProperties("Toppings", toppings)
                 app.setPropertiesChangeFunction("Toppings", changed)
                 app.stopToggleFrame()
-                app.showFrame("Back")
+
             with app.frame("data_display"):
                 """
                 this frame controls the liquids sections
@@ -63,13 +63,10 @@ class Gui:
                 app.addButtons(["coke", "pepsi", "water"], self.press)
                 app.setBg("lightBlue")
                 app.setFont(20)
-                app.showFrame("Back")
-
-
-
-
-
-
+            with app.frame("burgers"):
+                app.addButtons(["cheese burger", "XL cheese burger", "bacon sandwich"], self.press)
+                app.setBg("lightBlue")
+                app.setFont(20)
 
 
         app.firstFrame("stack")  # Sets the first frame added to stack to display first
@@ -82,8 +79,9 @@ class Gui:
         elif btn == "Back":
             self._app.firstFrame("stack")
         elif btn == "Drinks":
-            self._app.lastFrame("stack")
-
+            self._app.selectFrame("stack", 2)
+        elif btn == "burger":
+            self._app.selectFrame("stack", 3)
 
 
 # main routine
