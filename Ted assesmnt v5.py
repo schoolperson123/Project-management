@@ -102,7 +102,7 @@ class Gui:
             Theorder = "The order you have is:"
             counter = 0
             for x in Order_list:
-                if counter % 3 == 0:
+                if counter % 1 == 0:
                     Theorder += "\n " + "" + x
                 else:
                     Theorder += "  " + x
