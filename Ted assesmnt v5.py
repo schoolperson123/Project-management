@@ -1,25 +1,21 @@
 # Imports
 from appJar import gui
-import list
+import list # imports the order menu
 # Variables
-Order_list = []
-order_total = 0
-total = 0
+Order_list = [] # stores the ordered items
+order_total = 0 # stores order total
+total = 0 # stores how many orders have been made
 
 
 # Functions
 class Menu:
-    """
-    Class to set up and display gui
-    Also manages the button events
-    """
 
     def __init__(self, name, price, food):
         """
-                Initialise the gui class in 2 columns including:
-                - The top bar
-                - the data collection frame
-                - the data display window
+                A object to hold information of a person
+                :param name: food name
+                :param price: price of order
+                :param food: food type
         """
         self._name = name
         self._price = price
@@ -38,6 +34,16 @@ class Menu:
 
 class Gui:
     def __init__(self):
+        """
+        Class to set up and display gui
+        Also manages the button events
+        """
+        """
+        Initialise the gui class in 2 columns including:
+        - The top bar
+        - the data collection frame
+        - the data display window
+        """
         app = gui("Gui fast food menu", "1750x920")
         app.addLabel("title")
         app.setLabelBg("title", "blue")
@@ -61,7 +67,7 @@ class Gui:
             global order_total
             global total
             total += 1
-            if total < 20:
+            if total < 20: # checks order total and sets it to a maximum of 20 ordered items
                 order_total = order_total + meal_array[mainbtn][1]
                 Order_list.append(meal_array[mainbtn][0])
                 app.setLabel("display", Order_list)
@@ -113,6 +119,10 @@ class Gui:
         meal_array = [['Name', 'Price', 'Type', ]]
 
         with app.frameStack("stack"):
+            """
+            Sets up the entire frame system 
+            stores all frames in a stack
+            """
 
             with app.frame("data_collection"):
                 """
@@ -140,6 +150,6 @@ class Gui:
         app.firstFrame("stack") # Sets the first frame added to stack to display first
 
         app.go()
-        self._app = app
-
+        self._app = app # set the gui instance of _app to app
+# main routine
 window = Gui()

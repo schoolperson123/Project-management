@@ -1,4 +1,6 @@
+# Variables
 menu_list = []
+# Functions
 class Menu:
 
     def __init__(self, name, price, food):
@@ -20,7 +22,10 @@ class Menu:
 
     def get_food_meal(self):
         return (self._food_meal)
-
+"""
+The menu list for the order system in the code 
+with names and prices and menu types
+"""
 menu_list.append(Menu('Cheese Burger', 10, 'burgers'))
 menu_list.append(Menu('Chicken Burger', 13.50, 'burgers'))
 menu_list.append(Menu('Extra large burger', 17, 'burgers'))
