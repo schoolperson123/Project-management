@@ -1,3 +1,6 @@
+"""
+The menu to the fast food ordering system
+"""
 # Variables
 menu_list = []
 # Functions
