@@ -67,19 +67,17 @@ class Gui:
                 drinks(self)
             elif btn == "Finish":
                 finalorder(self)
-
+# the button system that collects the button pressed and sets the correct table
         def get(mainbtn):
             global order_total
             global total
             total += 1
-            if total < 20: # checks order total and sets it to a maximum of 20 ordered items
-                order_total = order_total + meal_array[mainbtn][1]
-                Order_list.append(meal_array[mainbtn][0])
-                app.setLabel("display", Order_list)
-                app.setLabel("Price_display", 'Total cost: $%d' % order_total)
-            else:
-                app.addLabel("max order")
-                finalorder(self)
+            order_total = order_total + meal_array[mainbtn][1]
+            Order_list.append(meal_array[mainbtn][0])
+            app.setLabel("Price_display", 'Total cost: $%d' % order_total)
+            app.setLabel("display", Order_list)
+
+
 
         def sides(self):
             meal_array.clear()
@@ -149,9 +147,9 @@ class Gui:
 
             with app.frame("Food_display", row=3):
                 app.addLabel("display", "")
-                app.setLabelBg("display", "grey")
                 app.addLabel("Price_display", 'Total cost USD: %d' % order_total)
                 app.setLabelBg("Price_display", "green")
+                app.setLabelBg("display", "grey")
 
         app.firstFrame("stack") # Sets the first frame added to stack to display first
 
