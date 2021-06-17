@@ -6,11 +6,11 @@ Fast food gui ordering system
 # Imports
 from appJar import gui
 import list # imports the order menu
+
 # Variables
 Order_list = [] # stores the ordered items
 order_total = 0 # stores order total
 total = 0 # stores how many orders have been made
-
 
 # Functions
 class Menu:
@@ -112,6 +112,7 @@ class Gui:
             app.setLabelBg("completed", "grey")
             Theorder = "The order you have is:"
             counter = 0
+
             for x in Order_list:
                 if counter % 1 == 0:
                     Theorder += "\n " + "" + x
@@ -128,7 +129,6 @@ class Gui:
             Sets up the entire frame system 
             stores all frames in a stack
             """
-
             with app.frame("data_collection"):
                 """
                 This frame control the selection of catergories
@@ -139,6 +139,7 @@ class Gui:
                 app.setImageLocation("images")
                 app.addImage("images", "image.jpeg")
                 app.addButtons(["Food", "drinks", "Finish"], press)
+
             with app.frame("food_frame"):
                 app.addButtons(["sides", "burgers"], press)
 
