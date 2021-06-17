@@ -76,9 +76,7 @@ class Gui:
             Order_list.append(meal_array[mainbtn][0])
             app.setLabel("Price_display", 'Total cost: $%d' % order_total)
             app.setLabel("display", Order_list)
-
-
-
+# defines the order types and set the tables when the button is pushed
         def sides(self):
             meal_array.clear()
             for x in list.menu_list:
@@ -102,7 +100,7 @@ class Gui:
                     meal_array.append([x.get_name(), x.get_price(), x.get_food_meal()])
             app.replaceAllTableRows("Menu display", meal_array, )
             app.selectFrame("stack", 2)
-
+# defines the final screen and displays the total price and ordered items
         def finalorder(self):
             app.selectFrame("stack", 3)
             app.hideLabel("display")
