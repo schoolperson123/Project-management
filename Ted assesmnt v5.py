@@ -1,3 +1,8 @@
+# Ted assesment
+# Michael Polianski
+""""
+Fast food gui ordering system
+"""
 # Imports
 from appJar import gui
 import list # imports the order menu
