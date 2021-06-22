@@ -14,29 +14,6 @@ total = 0  # stores how many orders have been made
 
 
 # Functions
-class Menu:
-
-    def __init__(self, name, price, food):
-        """
-                A object to hold information of a person
-                :param name: food name
-                :param price: price of order
-                :param food: food type
-        """
-        self._name = name
-        self._price = price
-        self._food_meal = food
-
-    def get_name(self):
-        return (self._name)
-
-    def get_price(self):
-        return (self._price)
-
-    def get_food_meal(self):
-        return (self._food_meal)
-
-
 class Gui:
     def __init__(self):
         """
