@@ -25,13 +25,16 @@ class Gui:
         - the data collection frame
         - the data display window
         """
-        app = gui("Gui fast food menu", "750x750")
+        app = gui("Gui fast food menu", "750x750") # sets up gui window
         app.addLabel("title")
         app.setLabelBg("title", "blue")
         app.setLabelFg("title", "orange")
-        app.setImageLocation("images")
+        app.setImageLocation("images") # sets image file location
         app.addImage("images", "image.jpeg")
-
+        """
+        Button system defined giving buttons
+        specified roles within the program
+        """
         def press(btn):
             if btn == "Food":
                 app.setImage("images", "side_burger.jpeg")
@@ -60,18 +63,22 @@ class Gui:
         # the button system that collects the button pressed and sets the correct table
         def get(mainbtn):
             global order_total
-            order_total = order_total + meal_array[mainbtn][1]
-            Order_list.append(meal_array[mainbtn][0])
+            order_total = order_total + meal_array[mainbtn][1] # collects costs and adds them together
+            Order_list.append(meal_array[mainbtn][0]) # adds ordered items to the list
             app.setLabel("Price_display", 'Total cost: $%d' % order_total)
             app.setLabel("display", Order_list)
 
-        # defines the order types and set the tables when the button is pushed
+        """
+        system defines buttons types and sets specific data types to them
+        allowing for different tables to be viewed and swapped.
+        defines the order types and set the tables when the button is pushed
+        """
         def Sides(self):
             meal_array.clear()
-            for x in list.menu_list:
-                if x.get_food_meal() == "Sides":
-                    meal_array.append([x.get_name(), x.get_price(), x.get_food_meal()])
-            app.replaceAllTableRows("Menu_display", meal_array, deleteHeader=False)
+            for x in list.menu_list: # collects data from list
+                if x.get_food_meal() == "Sides": # if specific button is pressed, collect that data type
+                    meal_array.append([x.get_name(), x.get_price(), x.get_food_meal()]) # add specific data type to a list
+            app.replaceAllTableRows("Menu_display", meal_array, deleteHeader=False) # replace table rows with specific data type
             app.selectFrame("stack", 2)
 
         def Drinks(self):
@@ -94,13 +101,13 @@ class Gui:
         def finalorder(self):
             app.selectFrame("stack", 3)
             app.hideLabel("display")
-            if order_total <1:
+            if order_total <1: # checks if anything has been ordered
                 app.setImage("images", "Reorder.jpeg")
                 app.selectFrame("stack", 4)
             else:
-                duplicate = {i: Order_list.count(i) for i in Order_list}
+                duplicate = {i: Order_list.count(i) for i in Order_list} # checks for duplicate orders and counts them
                 amount = []
-                for food, number in duplicate.items():
+                for food, number in duplicate.items(): # sets values for duplicate items
                     amount.append([food, number])
                 app.addTable('final_order',
                              [["Order", "Quantity"]
@@ -132,7 +139,7 @@ class Gui:
                 app.addButtons(["Sides", "Burgers"], press)
 
             with app.frame("List_frame"):
-                app.addTable("Menu_display", meal_array, action=get, mainbtn="Get")
+                app.addTable("Menu_display", meal_array, action=get)
                 app.addButton("Back", press)
 
 
