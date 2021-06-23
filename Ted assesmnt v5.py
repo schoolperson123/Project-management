@@ -10,7 +10,6 @@ import list  # imports the order menu
 # Variables
 Order_list = []  # stores the ordered items
 order_total = 0  # stores order total
-total = 0  # stores how many orders have been made
 
 
 # Functions
@@ -26,7 +25,7 @@ class Gui:
         - the data collection frame
         - the data display window
         """
-        app = gui("Gui fast food menu", "1750x920")
+        app = gui("Gui fast food menu", "750x750")
         app.addLabel("title")
         app.setLabelBg("title", "blue")
         app.setLabelFg("title", "orange")
@@ -44,12 +43,12 @@ class Gui:
                 drinks(self)
             elif btn == "Finish":
                 finalorder(self)
+            elif btn == "Quit":
+                app.stop()
 
         # the button system that collects the button pressed and sets the correct table
         def get(mainbtn):
             global order_total
-            global total
-            total += 1
             order_total = order_total + meal_array[mainbtn][1]
             Order_list.append(meal_array[mainbtn][0])
             app.setLabel("Price_display", 'Total cost: $%d' % order_total)
@@ -84,21 +83,20 @@ class Gui:
         def finalorder(self):
             app.selectFrame("stack", 3)
             app.hideLabel("display")
-            app.addLabel("completed", "The order has been finalised", row=0, column=0)
-            app.setLabelBg("completed", "grey")
-            Theorder = "The order you have is:"
-            list = 0
+            dup = {i: Order_list.count(i) for i in Order_list}
+            amount = []
+            for food, number in dup.items():
+                amount.append([food, number])
+            app.addTable('final_order',
+                         [['the final order', 'amount']
+                          ], row=4)
+            app.replaceAllTableRows('final_order', amount)
+            app.setLabel('title', "your order has been sent")
+            app.addButton('Quit', press, row=7)
 
-            for x in Order_list:
-                if list % 1 == 0:
-                    Theorder += "\n " + "" + x
-                else:
-                    Theorder += "  " + x
-                list += 1
-            app.addLabel("final_order", Theorder)
-            app.setLabelBg("final_order", "pink")
-
-        meal_array = [['Name', 'Price', 'Type', ]]
+        meal_array = [
+            ['Name', 'Price', 'Type', ]
+        ]
 
         with app.frameStack("stack"):
             """
@@ -123,11 +121,13 @@ class Gui:
                 app.addTable("Menu display", meal_array, action=get, mainbtn="Get")
                 app.addButton("Back", press)
 
+
             with app.frame("Food_display", row=3):
                 app.addLabel("display", "")
                 app.addLabel("Price_display", 'Total cost USD: %d' % order_total)
                 app.setLabelBg("Price_display", "green")
                 app.setLabelBg("display", "grey")
+
 
         app.firstFrame("stack")  # Sets the first frame added to stack to display first
 
